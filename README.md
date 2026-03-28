@@ -15,6 +15,7 @@ To deploy Ubuntu Desktop on a repurposed Toshiba Satellite C55 laptop as a local
 ## Project Steps:
 ### Step 1 - Ubuntu Desktop installation
 **Method:** Booted from a Ventoy multi-boot USB containing the Ubuntu Desktop ISO image.
+
 **Process:** 
 - Inserted Ventoy USB, booted up into The Toshiba Satellite C55's BIOS, changed the boot order/priority to the Ventoy USB and booted into Ventoy
 - Selected Ubuntu Desktop ISO from the Ventoy boot menu
@@ -23,5 +24,10 @@ To deploy Ubuntu Desktop on a repurposed Toshiba Satellite C55 laptop as a local
 - Completed installation and rebooted into Ubuntu Desktop
 
 **Outcome:** Ubuntu Desktop successfully installed and booting normally.
+
 **OS selected:** Ubuntu Desktop 24.04.04 LTS chosen for its long term 
 support stability and suitability for a server environment.
+
+### Step 2 - Configuring Ubuntu Desktop
+- Installed system updates using apt
+- Installed OpenSSH and Samba services
