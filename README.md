@@ -11,7 +11,7 @@ To deploy Ubuntu Desktop on a repurposed Toshiba Satellite C55 laptop as a local
 - Static IP addressing
 - Samba file server setup
 - SSH key based authentication
-- Remote server administration from windows
+- Remote server administration from Windows
 ## Project Steps:
 ### Step 1 - Ubuntu Desktop Installation
 **Method:** Booted from a Ventoy multi-boot USB containing the Ubuntu Desktop ISO image.
@@ -35,7 +35,8 @@ After updating all system and necessary services packages, the server was tuned 
 - **OpenSSH & Samba:** Installed to allow remote CLI management and cross-platform file sharing.
 >- **Verification**:
 ```Bash
-systemctl status ssh smbd (should show active (running)and enabled).
+systemctl status ssh smbd
+# Should show active (running)and enabled)
 ```
 
 **Hardware Optimizations:**
@@ -63,6 +64,14 @@ mount | grep " / "
  systemctl --user list-unit-files | grep tracker 
  # Status should show 'masked' for all miner/extractor services
  ```
-### **Resource Baseline**
+### **Resource Baseline (Post-Optimization)**
 **Monitoring:** Utilized *htop* to establish a performance baseline, verifying that background I/O wait is minimized and ZRAM is handling memory pressure efficiently.
 
+**Observed Results:**
+- **RAM Usage:** 950MB/3.69GB at idle
+- **Swap:** ZRAM active, minimal HDD swap utilization
+- **CPU:** Low idle usage confirming background processes are minimal
+- **I/O Wait:** Minimal, confirming noatime and Tracker3 masking are effective
+![Resource Baseline - htop and ZRAM confirmation](screenshots/htop-zramctl.png)
+**Conclusion:** The optimized configuration demonstrates efficient resource 
+utilization suitable for sustained file server operation on legacy hardware.
