@@ -73,5 +73,6 @@ mount | grep " / "
 - **CPU:** Low idle usage confirming background processes are minimal
 - **I/O Wait:** Minimal, confirming noatime and Tracker3 masking are effective
 ![Resource Baseline - htop and ZRAM confirmation](screenshots/htop-zramctl.png)
+
 **Conclusion:** The optimized configuration demonstrates efficient resource 
 utilization suitable for sustained file server operation on legacy hardware.
