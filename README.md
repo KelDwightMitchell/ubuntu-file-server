@@ -17,7 +17,7 @@ To deploy Ubuntu Desktop on a repurposed Toshiba Satellite C55 laptop as a local
 **Method:** Booted from a Ventoy multi-boot USB containing the Ubuntu Desktop ISO image.
 
 **Process:** 
-- Inserted Ventoy USB, booted up into The Toshiba Satellite C55's BIOS, changed the boot order/priority to the Ventoy USB and booted into Ventoy
+- Inserted Ventoy USB, booted up into the Toshiba Satellite C55's BIOS, changed the boot order/priority to the Ventoy USB and booted into Ventoy
 - Selected Ubuntu Desktop ISO from the Ventoy boot menu
 - Followed the Ubuntu installation wizard
 - Created a local user account during setup
@@ -33,37 +33,42 @@ After updating all system and necessary services packages, the server was tuned 
 
 **Services Installed:**
 - **OpenSSH & Samba:** Installed to allow remote CLI management and cross-platform file sharing.
->- **Verification**:
+- **Verification**:
 ```Bash
 systemctl status ssh smbd
-# Should show active (running)and enabled)
+# Should show active (running) and (enabled)
 ```
+![SSH & Samba running and enabled](screenshots/samba-ssh%20verified.png)
 
 **Hardware Optimizations:**
 - **ZRAM Implementation:** A compressed RAM swap was initialized using the **LZ4 algorithm.** This creates a high-speed buffer, preventing the system from "thrashing" the slow physical HDD when memory usage spikes.
->- **Validation:**
+- **Validation:**
 ```Bash
  zramctl 
 # Confirmed /dev/zram0 is active with 1.8G disk size
  ```
+ ![ZRAM running](screenshots/zramctl.png)
 - **Virtual Memory Optimization:** The *vm.swappiness* parameter was reduced from 60 to **10.** This instructs the kernel to prioritize physical RAM/ZRAM, only utilizing the HDD swap as a last resort.
->- **Validation:** 
+- **Validation:** 
 ```Bash
 cat /proc/sys/vm/swappiness 
 # Output:10
 ```
-- **Filesystem Metadata Reduction:** The root partition was remounted with the ***noatime*** flag.This eliminates unnecessary disk writes during file "read" operations, preserving HDD bandwidth for actual data transfers.
->- **Validation:** 
+![Successful swappiness](screenshots/swappiness.png)
+- **Filesystem Metadata Reduction:** The root partition was remounted with the ***noatime*** flag. This eliminates unnecessary disk writes during file "read" operations, preserving HDD bandwidth for actual data transfers.
+- **Validation:** 
 ```Bash
 mount | grep " / " 
 # Look for 'noatime' in the mount options parentheses
 ```
+![Noatime validated](screenshots/noatime.png)
 - **Background Indexing Deactivation:** The **Tracker3** suite (system-wide file indexing) was masked to reclaim more available RAM and stop background disk grinding.
->- **Validation:**
+- **Validation:**
 ```Bash
  systemctl --user list-unit-files | grep tracker 
  # Status should show 'masked' for all miner/extractor services
  ```
+ ![All Tracker3 services masked](screenshots/tracker3-masked.png)
 ### **Resource Baseline (Post-Optimization)**
 **Monitoring:** Utilized *htop* to establish a performance baseline, verifying that background I/O wait is minimized and ZRAM is handling memory pressure efficiently.
 
