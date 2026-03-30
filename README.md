@@ -108,7 +108,7 @@ mount | grep " / "
 **Conclusion:** The optimized configuration demonstrates efficient resource 
 utilization suitable for sustained file server operation on legacy hardware.
 
-### Step 3 - Configuring Networking & Samba
+### Step 3 - Configuring Networking
 This phase establishes a high-availability network identity for the server and implements Role-Based Access Control (RBAC) to secure business data.
 
 **1.Network Foundation**:
@@ -159,4 +159,4 @@ ping -I wlp2s0 -c 5 google.com
 ```
 ![Step 3 Verification](screenshots/step%203%20verification.png)
 
-
+**Conclusion**: The completion of these configurations confirms that high-availability networking was successfully implemented. The server now has a reliable primary connection on Ethernet and a backup path on Wi-Fi that takes over automatically if a cable is pulled. By locking in these static IPs and DNS settings, I’ve ensured that the server maintains a consistent network presence, making future services,like Samba file shares,easily reachable via either interface or the system’s hostname.
