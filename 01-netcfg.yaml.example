@@ -1,0 +1,28 @@
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    enp1s0:
+      dhcp4: no
+      addresses:
+        - 192.168.40.200/24
+      routes:
+        - to: default
+          via: 192.168.40.1
+          metric: 100
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1]
+  wifis:
+    wlp2s0:
+      dhcp4: no
+      addresses:
+        - 192.168.40.201/24
+      access-points:
+        "YOUR_SSID_HERE":
+          password: "YOUR_PASSWORD_HERE"
+      routes:
+        - to: default
+          via: 192.168.40.1
+          metric: 600
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1]
